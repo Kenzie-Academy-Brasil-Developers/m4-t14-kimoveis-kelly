@@ -6,9 +6,6 @@ import path from 'path'
 const dataSourceConfig = (): DataSourceOptions =>{
     const entitiesPath: string =  path.join(__dirname, './entities/**.{ts,ts}')
     const migrationsPath: string =  path.join(__dirname, './migrations/**.{ts,ts}')
-
-    const dbUrl: string | undefined = process.env.DATABASE_URL
-    if(!dbUrl) throw new Error('Env var DATABASE_URL does not exists')
     
     const nodeEnv: string | undefined = process.env.NODE_ENV
     if(nodeEnv === 'test'){
@@ -19,6 +16,9 @@ const dataSourceConfig = (): DataSourceOptions =>{
             entities: [entitiesPath]
         }
     }
+    
+    const dbUrl: string | undefined = process.env.DATABASE_URL
+    if(!dbUrl) throw new Error('Env var DATABASE_URL does not exists')
 
     return {
         type: 'postgres',

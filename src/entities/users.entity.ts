@@ -19,13 +19,13 @@ class User {
     @Column({ type: 'boolean', default: false })
     admin: boolean
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: 'date' })
     createdAt: string
 
-    @UpdateDateColumn({ nullable:true })
+    @UpdateDateColumn({type: 'date', nullable:true })
     updatedAt: string 
 
-    @DeleteDateColumn({ nullable:true })
+    @DeleteDateColumn({ type: 'date', nullable:true })
     deletedAt: string
 
     @OneToMany(()=> Schedule, (schedule)=> schedule.user)
