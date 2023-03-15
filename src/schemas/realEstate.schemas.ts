@@ -1,13 +1,25 @@
 import { z } from 'zod'
-import { addressReturnSchema } from './address.schemas'
 import { categoryResponseSchema } from './categories.schemas'
+
+const addressRequestSchema = z.object({
+    street: z.string(),
+    zipCode: z.string().max(8),
+    number: z.string().max(7).nullish(),
+    city: z.string().max(20),
+    state: z.string().max(2)
+})
+
+const addressReturnSchema = addressRequestSchema.extend({
+    id: z.number()
+})
+
 
 const realEstateRequestSchema = z.object({
     sold: z.boolean().default(false),
-    value: z.string().or(z.number().transform(n => n.toString())).transform((n)=> {
-        if(typeof n === 'string') parseFloat(n).toFixed(2)
-    }),
-    size: z.number().positive().int()
+    value: z.string().or(z.number().positive()),
+    size: z.number().positive().int(),
+    address: addressRequestSchema,
+    categoryId: z.number()
 
 })
 
@@ -20,12 +32,20 @@ const realEstateResponseSchema = realEstateRequestSchema.extend({
         zipCode: true,
         number: true,
         city: true,
-        state: true
+        state: true,
+        id: true
     }),
-    categoryId: categoryResponseSchema.pick({id: true})  
+    category: categoryResponseSchema
+}).omit({
+    categoryId:true
 })
+
+const listRealEstateSchema = z.array(realEstateResponseSchema)
 
 export{
     realEstateRequestSchema,
-    realEstateResponseSchema
+    realEstateResponseSchema,
+    addressRequestSchema,
+    addressReturnSchema,
+    listRealEstateSchema
 }

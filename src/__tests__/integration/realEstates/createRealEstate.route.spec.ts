@@ -22,7 +22,7 @@ describe('POST /realEstate', () => {
   it('Success: Must be able to create real estates - Admin token - Full body', async () => {
     const { categoryToCreate, ...payload } =
       createRealEstateRouteMock.realEstateComplete;
-
+    
     const category = await AppDataSource.getRepository(Category).save(
       categoryToCreate
     );
@@ -36,7 +36,7 @@ describe('POST /realEstate', () => {
       status: 201,
       expectBody: { ...payload, category },
     };
-
+    
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toEqual(
       expect.objectContaining(expectResults.expectBody)

@@ -4,22 +4,25 @@ import { userCreatedReturnSchema } from './users.schemas'
 
 const scheduleRequestSchema = z.object({
     date: z.string().regex(/^\d{4}\/\d{2}\/\d{2}$/),
-    hour: z.string().regex(/^([0][8-9]|[1][0-8]):([0-5][0-9])$/),
-    realEstateId: realEstateResponseSchema.pick({id: true}),
+    hour: z.string().regex(/^\d{2}:\d{2}$/),
+    realEstateId: z.number(),
 })
 
 const scheduleResponseSchema = scheduleRequestSchema.extend({
     id: z.number(),
-    userId: userCreatedReturnSchema.pick({id: true})
+    user: userCreatedReturnSchema,
+    realEstate: realEstateResponseSchema
+}).omit({
+    realEstateId: true
 })
 
 const allScheduleForRealEstate = z.object({
     id: z.number(),
-    userId: userCreatedReturnSchema,
-    
+    userId: userCreatedReturnSchema,  
 })
 
 export{
     scheduleRequestSchema,
-    scheduleResponseSchema
+    scheduleResponseSchema,
+    allScheduleForRealEstate
 }

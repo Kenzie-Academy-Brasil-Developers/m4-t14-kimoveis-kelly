@@ -25,7 +25,7 @@ const get = async (): Promise<tlistAllUsers> => {
 
 const update = async (userData: tUpdateUserRequest, userId: number ): Promise<tCreateUserResponse> => {
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
-    console.log(userId)
+  
     const previousUserData = await userRepository.findOneBy({
         id: userId
     })     

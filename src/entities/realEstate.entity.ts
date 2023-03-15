@@ -12,16 +12,16 @@ class RealEstate {
     @Column({ type: 'boolean', default: true })
     sold: boolean
 
-    @Column({ type: 'decimal', precision: 12, scale: 2 })
+    @Column({ type: 'decimal', precision: 12, scale: 2, default: 0 })
     value: number | string
 
     @Column({ type: 'integer' })
     size: number
 
-    @CreateDateColumn()
+    @CreateDateColumn({type: 'date'})
     createdAt: string
 
-    @UpdateDateColumn({ nullable:true })
+    @UpdateDateColumn({type: 'date', nullable:true })
     updatedAt: string 
 
     @OneToOne(()=> Address)

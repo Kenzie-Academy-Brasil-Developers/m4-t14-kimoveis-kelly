@@ -41,7 +41,7 @@ describe('POST /users', () => {
     expect(response.body).not.toEqual(
       expect.objectContaining({ password: expect.any(String) })
     );
-      console.log(response.body, "---->aqui")
+      
     expect(response.body).toEqual(
       expect.objectContaining({
         id: expect.any(Number),

@@ -80,7 +80,7 @@ describe('DELETE /users', () => {
       status: 404,
       bodyEqual: { message: 'User not found' },
     };
-    console.log(response.status, "--------AQUI CARALEO")
+    
     expect(response.status).toBe(errorsMock.notFound.user.status);
     expect(response.body).toStrictEqual(errorsMock.notFound.user.error);
   });

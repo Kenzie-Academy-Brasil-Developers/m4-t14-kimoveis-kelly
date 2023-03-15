@@ -11,7 +11,7 @@ app.use('/users', usersRoutes)
 app.use('/login', loginRoute)
 app.use('/categories', categoriesRoutes)
 app.use('/realEstate', realEstateRoutes)
-app.use('/schedudeles', schedulesRoutes)
+app.use('/schedules', schedulesRoutes)
 
 app.use(error.handleError)
 
