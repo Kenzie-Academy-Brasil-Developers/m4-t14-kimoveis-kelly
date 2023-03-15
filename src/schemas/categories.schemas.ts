@@ -11,11 +11,6 @@ const categoryResponseSchema = categoryRequestSchema.extend({
 
 const listCategorySchema = z.array(categoryResponseSchema) 
 
-const listAllRealEstateFromCategory = z.object({
-    id: z.number(),
-    name: z.string(),
-    realEstate: realEstateResponseSchema.array()
-})
 export {
     categoryRequestSchema,
     categoryResponseSchema,
